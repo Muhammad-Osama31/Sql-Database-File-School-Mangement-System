@@ -1,0 +1,68 @@
+
+CREATE DATABASE shopping;
+CREATE TABLE login(
+login_id INT(8)PRIMARY KEY NOT NULL ,
+login_phone INT(12),
+login_passward VARCHAR(15)
+); 
+INSERT INTO login(login_id,login_phone,login_passward) VALUES(12213,0303002343,'osama'),(33452,0323412343,'fayyaz'),
+(344,0351512122,'talha'),(534,033353145,'asim');
+CREATE TABLE user_(
+user_name VARCHAR(15),
+user_email VARCHAR(15),
+user_DOB VARCHAR(15),
+user_gender VARCHAR(6),
+user_id INT(8) PRIMARY KEY NOT NULL,
+user_mobileNo INT(15),
+user_address VARCHAR(15),
+login_id INT(9),
+login_passward VARCHAR(14),
+FOREIGN KEY (login_id) REFERENCES login(login_id)
+);
+INSERT INTO user_(user_name,user_email,user_DOB,user_gender,user_id,user_mobileNo,user_address) 
+VALUES('osamaa','osamafayyaz46@','1/2/1995','M',23,0303020428,'light house')
+,('asif','asif@gmail.com','6/5/1992','M',22,0343534528,'sadar')
+,('talha','tal@gmail.com','4/2/1998','M',24,03345345428,'gulshan')
+,('amir','amir@gmail.com','3/2/1993','M',25,0304353428,'Defense')
+,('faisal','faisal@gm.com','6/6/1997','M',26,0303453428,'quidabad');
+
+CREATE TABLE product(
+product_id INT(8) PRIMARY KEY NOT NULL,
+product_number INT(9),
+product_cus_id INT(8),
+product_description VARCHAR(14),
+product_item VARCHAR(13),
+product_type VARCHAR(14),
+user_id INT(8),
+FOREIGN KEY(user_id) REFERENCES user_(user_id)
+);
+INSERT INTO product(product_id,product_number,product_cus_id,product_description,product_item,product_type)
+ VALUES(32,3234,444,'watch','time watch','1 watch'),
+(77,4453,4234,'mobile','sony','1sonymobile'),
+(99,522,6854,'DVD','Songs','1 DVD'),
+(1212,636,6242,'cloths','teashirts','1 teashirts');
+
+CREATE TABLE payment(
+pay_id INT(8) PRIMARY KEY NOT NULL,
+pay_description VARCHAR(15),
+pay_date VARCHAR(15),
+pay_customer_id INT(14),
+pay_amount INT (13),
+user_id INT(8),
+FOREIGN KEY(user_id)REFERENCES user_(user_id)
+);
+INSERT INTO payment(pay_id,pay_description,pay_date,pay_customer_id,pay_amount) 
+VALUES(32,'payment by paypal','22/3/19',4453,3242),
+(31,'payment by jazz cash','3/4/19',53,2344),
+(34,'payment by bank ','4/4/19',35,5233),
+(37,'payment by bank','4/5/19',34,6342); 
+
+
+CREATE TABLE sale_(
+sale_id INT(8) PRIMARY KEY NOT NULL,
+sale_type VARCHAR(8),
+sale_description VARCHAR(8),
+pay_customer_id INT(9)
+);
+INSERT INTO sale_(sale_id,sale_type,sale_description,pay_customer_id) VALUES
+(1,'watch','soled','single',23),(3,'mobile','notsole','single',33);
